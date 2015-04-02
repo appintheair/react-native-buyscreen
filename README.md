@@ -9,7 +9,7 @@ Current version (with real StoreKit integration) will be used in [App in the Air
 ### Components
 Was built using framework provided components:
 * `Line` — simple line
-* `Carousel` — scroll view which its contents in loop and allows the user to change pages
+* [`Carousel`](https://github.com/appintheair/react-native-looped-carousel) — scroll view which its contents in loop and allows the user to change pages
 * `FilledButton` — button with round corners
 * `HUDActivityIndicator` — simple [MBProgressHUD](https://github.com/jdg/MBProgressHUD)-inspired activity indicator
 
