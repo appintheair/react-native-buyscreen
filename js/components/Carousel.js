@@ -40,7 +40,7 @@ var Carousel = React.createClass({
     componentDidMount:function(){
       this._setUpTimer();
     },
-    _onScroll: function(event) {
+    _onScrollBegin: function(event) {
       clearTimeout(this.timer);
     },
     _onScrollEnd: function(event) {
@@ -106,8 +106,7 @@ var Carousel = React.createClass({
       return (
         <ScrollView
           ref='scrollView'
-          onScroll={this._onScroll}
-          scrollEventThrottle={100}
+          onScrollBeginDrag={this._onScrollBegin}
           onMomentumScrollEnd={this._onScrollEnd}
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
