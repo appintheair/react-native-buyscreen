@@ -1,6 +1,6 @@
 # react-native Buyscreen sample
 
-Based on [react-native framework](https://github.com/facebook/react-native/) (as of 0.3.4) by Facebook.
+Based on [react-native framework](https://github.com/facebook/react-native/) (as of 0.11.2) by Facebook.
 
 Customizable buy-screen for displaying products for user to purchase. Have links to native code in order to process transactions and load actual products configuration (e.g. if loaded from backend).
 

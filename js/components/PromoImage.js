@@ -16,19 +16,21 @@ var {
  * Displays promo text on top of the image
 */
 var PromoImage = React.createClass({
+  propType: {
+    style: View.propTypes.style,
+  },
   render: function() {
     return (
       <Image
-        contentContainerStyle={styles.usecase}
-        style={styles.usecase}
+        style={[this.props.style, styles.usecase]}
         source={this.props.image}
       >
-      <View>
-        <Text style={[styles.text, styles.promoHeader]}>{this.props.header}</Text>
-        <Text style={[styles.text, styles.promoDescription]}>{this.props.description}</Text>
-        <Line style={{backgroundColor:'#0ea378'}} />
-        <Text style={[styles.text, styles.promoText]}>{this.props.promoText}</Text>
-      </View>
+        <View style={styles.promoView}>
+          <Text style={[styles.text, styles.promoHeader]}>{this.props.header}</Text>
+          <Text style={[styles.text, styles.promoDescription]}>{this.props.description}</Text>
+          <Line style={{backgroundColor:'#0ea378'}} />
+          <Text style={[styles.text, styles.promoText]}>{this.props.promoText}</Text>
+        </View>
       </Image>
     );
   }
@@ -36,14 +38,15 @@ var PromoImage = React.createClass({
 
 var styles = StyleSheet.create({
   usecase: {
-    flex:1,
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: Image.resizeMode.cover,
-    flexDirection:'column'
+    flexDirection: 'column',
+    flex: 1
+  },
+  promoView: {
+    backgroundColor: 'transparent',
   },
   text: {
-    backgroundColor: 'transparent',
     color: 'white',
     textAlign: 'center',
   },

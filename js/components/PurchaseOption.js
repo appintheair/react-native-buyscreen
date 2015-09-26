@@ -9,7 +9,7 @@ var {
 
 var FilledButton = require('./FilledButton');
 var Aita = require('../Aita');
-var InAppUtils = require('NativeModules').InAppUtils;
+var InAppUtils = require('react-native').NativeModules.InAppUtils;
 
 /**
  * Displays specified product
@@ -31,7 +31,7 @@ var PurchaseOption = React.createClass({
     this.props.onPurchaseStarted(identifier);
 
     //call native to process purchase
-    InAppUtils.purchaseProduct(identifier, (error) => {
+    InAppUtils.purchaseProductWithIdentifier(identifier, (error) => {
       this.props.onPurchaseEnded(error, identifier);
     });
   },

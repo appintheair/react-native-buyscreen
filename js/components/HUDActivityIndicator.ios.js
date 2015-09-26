@@ -37,6 +37,7 @@ var styles = StyleSheet.create({
     borderRadius: 10,
   },
   hudCenter: {
+    backgroundColor: 'transparent',
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',

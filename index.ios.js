@@ -2,13 +2,11 @@
 
 var React = require('react-native');
 var PurchaseOption = require('./js/components/PurchaseOption');
-var InAppUtils = require('NativeModules').InAppUtils;
+var InAppUtils = require('react-native').NativeModules.InAppUtils;
 var Carousel = require('react-native-looped-carousel');
 var HUDActivityIndicator = require('./js/components/HUDActivityIndicator.ios');
 var PromoImage = require('./js/components/PromoImage');
 var Dimensions = require('Dimensions');
-// TODO: Dimensions may dissapear in next versions,
-// or we we will be able to subscribe to dimensions change
 var {width, height} = Dimensions.get('window');
 
 var {
@@ -25,7 +23,7 @@ var AitaBuyscreen = React.createClass({
     //call native to load in-apps products configuration
     InAppUtils.loadProducts((error, products) => {
       if (error) {
-        console.error(error);
+        //console.error(error);
       } else {
         this.setState({products: products});
       }
@@ -63,7 +61,7 @@ var AitaBuyscreen = React.createClass({
           var style = {};
           if (i===0) {
               style.paddingLeft = 12;
-          } else if(i === this.state.products.length - 1) {
+          } else if (i === this.state.products.length - 1) {
               style.paddingRight = 12;
           }
           return (
@@ -83,6 +81,7 @@ var AitaBuyscreen = React.createClass({
                   header="Be aware"
                   description="of everything that happens to your flight"
                   promoText="Get Text messages or Push for every flight status change"
+                  style={styles.pageStyle}
                 />,
                 <PromoImage
                   key="promo2"
@@ -90,6 +89,7 @@ var AitaBuyscreen = React.createClass({
                   header="Stay"
                   description="informed when offline"
                   promoText="Text messages keep you informed of your flight with no roaming charges"
+                  style={styles.pageStyle}
                 />,
                 <PromoImage
                   key="promo3"
@@ -97,13 +97,16 @@ var AitaBuyscreen = React.createClass({
                   header="Don't"
                   description="miss your flight"
                   promoText="We will notify you of every flight status change"
+                  style={styles.pageStyle}
                 />];
 
     var indicator = this.state.isIndicatorAnimating ? <HUDActivityIndicator /> : null;
 
     return (
       <View style={styles.main}>
-          <Carousel>{pages}</Carousel>
+          <Carousel style={styles.carouselStyle} pageStyle={styles.pageStyle} >
+            {pages}
+          </Carousel>
           <View style={styles.options}>{options}</View>
           {indicator}
       </View>
@@ -113,11 +116,20 @@ var AitaBuyscreen = React.createClass({
 
 var styles = StyleSheet.create({
   main: {
-    flex: 1,
+    flex: 1
+  },
+  carouselStyle: {
+    height: height,
+    width: width
+  },
+  pageStyle: {
+    width: width,
+    height: height
   },
   options: {
+    backgroundColor: 'transparent',
     position: 'absolute',
-    width:width,
+    width: width,
     bottom: 24,
     marginTop: 40,
     flexDirection: 'row',

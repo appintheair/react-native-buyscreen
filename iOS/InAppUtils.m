@@ -13,8 +13,9 @@
 
 @implementation InAppUtils
 
-- (void)purchaseProductWithIdentifier:(NSString *)identifier completion:(RCTResponseSenderBlock)completion {
-    RCT_EXPORT(purchaseProduct);
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(purchaseProductWithIdentifier:(NSString *)identifier completion:(RCTResponseSenderBlock)completion) {
     RCTLogInfo(@"purchasing product %@", identifier);
     
     //TODO: add real purchase logic
@@ -23,8 +24,7 @@
     });
 }
 
-- (void)loadProducts:(RCTResponseSenderBlock)completion {
-    RCT_EXPORT();
+RCT_EXPORT_METHOD(loadProducts:(RCTResponseSenderBlock)completion) {
     RCTLogInfo(@"loading products");
     
     //TODO: add real loading product + getting prices
