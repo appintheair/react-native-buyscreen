@@ -48,11 +48,12 @@ var styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   promoHeader: {
     fontSize: 42,
     fontWeight: '700',
+    alignSelf: 'center'
   },
   promoDescription: {
     fontSize: 22,
