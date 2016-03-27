@@ -1,12 +1,12 @@
 {
   "name": "AitaBuyscreen",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "^0.13.0",
-    "react-native-looped-carousel": "0.0.6"
+    "react-native": "^0.21.0",
+    "react-native-looped-carousel": "^0.0.8"
   }
 }

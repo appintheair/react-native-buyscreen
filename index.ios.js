@@ -32,12 +32,17 @@ var AitaBuyscreen = React.createClass({
   getInitialState: function() {
     return {
       products: InAppUtils.defaultConfiguration,
-      isIndicatorAnimating: false
+      isIndicatorAnimating: false,
+      size: {width: width, height: height}
     };
   },
   _onPurchaseStarted: function(identifier) {
     console.log('started ' + identifier);
     this.setState({isIndicatorAnimating: true})
+  },
+  _onLayoutDidChange: function(e) {
+    var layout = e.nativeEvent.layout;
+    this.setState({size: {width: layout.width, height: layout.height}});
   },
   _onPurchaseEnded: function(error, identifier) {
     if (error) {
@@ -54,6 +59,9 @@ var AitaBuyscreen = React.createClass({
       );
     }
     this.setState({isIndicatorAnimating: false})
+  },
+  _onPageChanged: function(page) {
+    console.log('page changed ' + page);
   },
   render: function() {
     var options = this.state.products.map(
@@ -81,7 +89,7 @@ var AitaBuyscreen = React.createClass({
                   header="Be aware"
                   description="of everything that happens to your flight"
                   promoText="Get Text messages or Push for every flight status change"
-                  style={styles.pageStyle}
+                  style={this.state.size}
                 />,
                 <PromoImage
                   key="promo2"
@@ -89,7 +97,7 @@ var AitaBuyscreen = React.createClass({
                   header="Stay"
                   description="informed when offline"
                   promoText="Text messages keep you informed of your flight with no roaming charges"
-                  style={styles.pageStyle}
+                  style={this.state.size}
                 />,
                 <PromoImage
                   key="promo3"
@@ -97,17 +105,17 @@ var AitaBuyscreen = React.createClass({
                   header="Don't"
                   description="miss your flight"
                   promoText="We will notify you of every flight status change"
-                  style={styles.pageStyle}
+                  style={this.state.size}
                 />];
 
     var indicator = this.state.isIndicatorAnimating ? <HUDActivityIndicator /> : null;
 
     return (
-      <View style={styles.main}>
-          <Carousel style={styles.carouselStyle} pageStyle={styles.pageStyle} >
+      <View style={styles.main} onLayout={this._onLayoutDidChange}>
+          <Carousel style={this.state.size} pageStyle={this.state.size} onAnimateNextPage={this._onPageChanged}>
             {pages}
           </Carousel>
-          <View style={styles.options}>{options}</View>
+          <View style={[styles.options, {width: this.state.size.width}]}>{options}</View>
           {indicator}
       </View>
     );
@@ -117,14 +125,6 @@ var AitaBuyscreen = React.createClass({
 var styles = StyleSheet.create({
   main: {
     flex: 1
-  },
-  carouselStyle: {
-    height: height,
-    width: width
-  },
-  pageStyle: {
-    width: width,
-    height: height
   },
   options: {
     backgroundColor: 'transparent',
